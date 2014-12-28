@@ -28,5 +28,27 @@ script:
 
 ## Customizing
 
-You might want to lint other files, check an example in my
-[dotfiles](https://github.com/caarlos0/dotfiles) project.
+You might want to lint other files, to do that, you need your own
+`build.sh` and a slight change in `.travis.yml` file.
+
+Example (from  my [dotfiles](https://github.com/caarlos0/dotfiles)):
+
+```sh
+#!/usr/bin/env bash
+set -eo pipefail
+source ./build/build.sh
+check "./zsh/zshrc.symlink"
+```
+
+```yml
+language: bash
+install:
+  - ./build/install.sh
+script:
+  - ./build.sh
+notifications:
+  email: false
+```
+
+This will make travis ran the `build.sh` from this project first,
+then, lint your custom files.
