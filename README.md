@@ -25,3 +25,8 @@ install:
 script:
   - ./build/build.sh
 ```
+
+## Customizing
+
+You might want to lint other files, check an example in my
+[dotfiles](https://github.com/caarlos0/dotfiles) project.
