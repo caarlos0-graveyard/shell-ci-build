@@ -1,7 +1,7 @@
 shell-travis-build [![Build Status](https://travis-ci.org/caarlos0/shell-travis-build.svg?branch=master)](https://travis-ci.org/caarlos0/shell-travis-build)
 ==================
 
-A submodule to your shell projects travis build, linting with shellcheck.
+A submodule to lint your shell projects with shellcheck in travis.ci builds.
 
 ## Build
 
