@@ -27,7 +27,6 @@ check_all_executables() {
 }
 
 main() {
-  check "./zsh/zshrc.symlink"
   check_all_executables
 }
 
