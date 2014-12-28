@@ -3,6 +3,12 @@ shell-travis-build
 
 A submodule to your shell projects travis build, linting with shellcheck.
 
+## Build
+
+- The `install.sh` script will install shellckeck.
+- The `build.sh` will link all executable files with shellcheck, avoiding
+Ruby, compdef and the like files. The max depth is 2.
+
 ## Usage
 
 ```sh
