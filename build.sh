@@ -26,8 +26,4 @@ check_all_executables() {
   done
 }
 
-main() {
-  check_all_executables
-}
-
-main
+check_all_executables
