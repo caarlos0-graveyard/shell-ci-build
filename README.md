@@ -52,3 +52,12 @@ notifications:
 
 This will make travis ran the `build.sh` from this project first,
 then, lint your custom files.
+
+## Updating
+
+Update your projects is easy. Just run this:
+
+```sh
+cd build && git pull && cd .. && \
+  git commit -am 'updated shell-travis-build version' && git push
+```

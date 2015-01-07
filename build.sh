@@ -18,6 +18,7 @@ check() {
 }
 
 check_all_executables() {
+  echo "Linting all executables with maxdepth=2..."
   find . -maxdepth 2 -type f -perm +111 | grep -v "\.git" | while read script; do
     head=$(head -n1 "$script")
     [[ "$head" = "#!/usr/bin/env ruby" ]] && continue
