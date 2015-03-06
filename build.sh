@@ -17,9 +17,23 @@ check() {
   success "$script"
 }
 
+find_prunes() {
+  local prunes="! -path './.git/*'"
+  if [ -f .gitmodules ]; then
+    while read module; do
+      prunes="$prunes ! -path './$module/*'"
+    done < <(grep path .gitmodules | awk '{print $3}')
+  fi
+  echo "$prunes"
+}
+
+find_cmd() {
+  echo "find . -type f -and \( -perm +111 -or -name '*.sh' \) $(find_prunes)"
+}
+
 check_all_executables() {
-  echo "Linting all executables with maxdepth=2..."
-  find . -maxdepth 2 -type f -perm +111 | grep -v "\.git" | while read script; do
+  echo "Linting all executables and .sh files, ignoring files inside git modules..."
+  eval "$(find_cmd)" | while read script; do
     head=$(head -n1 "$script")
     [[ "$head" = "#!/usr/bin/env ruby" ]] && continue
     [[ "$head" =~ ^#compdef.* ]] && continue
