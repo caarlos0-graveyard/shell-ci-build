@@ -63,6 +63,7 @@ issue if you have any problems.
 Update your projects is easy. Just run this:
 
 ```sh
-cd build && git pull && cd .. && \
-  git commit -am 'updated shell-travis-build version' && git push
+git submodule update --remote --merge && \
+  git commit -am 'updated shell-travis-build version' && \
+  git push
 ```
