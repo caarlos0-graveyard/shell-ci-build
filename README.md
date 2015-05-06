@@ -1,4 +1,4 @@
-shell-travis-build [![Build Status](https://travis-ci.org/caarlos0/shell-travis-build.svg?branch=master)](https://travis-ci.org/caarlos0/shell-travis-build)
+shell-ci-build [![Build Status](https://travis-ci.org/caarlos0/shell-ci-build.svg?branch=master)](https://travis-ci.org/caarlos0/shell-ci-build)
 ==================
 
 A submodule to lint your shell projects with shellcheck in travis.ci builds.
@@ -13,8 +13,14 @@ directory and files of your `gitmodules`, if any.
 ## Usage
 
 ```sh
-git submodule add https://github.com/caarlos0/shell-travis-build.git build
+git submodule add https://github.com/caarlos0/shell-ci-build.git build
 cp build/travis.yml.example .travis.yml
+```
+
+We also support Shippable:
+
+```
+cp build/shippable.yml.example .shippable.yml
 ```
 
 Or tweak your `.travis.yml` to be like this:
@@ -64,6 +70,6 @@ Update your projects is easy. Just run this:
 
 ```sh
 git submodule update --remote --merge && \
-  git commit -am 'updated shell-travis-build version' && \
+  git commit -am 'updated shell-ci-build version' && \
   git push
 ```
