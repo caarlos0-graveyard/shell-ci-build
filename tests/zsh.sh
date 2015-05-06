@@ -1,3 +1,2 @@
-#!/bin/bash
-
+#!/bin/zsh
 echo "hi"

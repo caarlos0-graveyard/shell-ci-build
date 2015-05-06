@@ -1,3 +1,2 @@
-#!/bin/ksh
-
+#!/bin/sh
 echo "hi"
