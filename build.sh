@@ -35,7 +35,8 @@ check_all_executables() {
   echo "Linting all executables and .sh files, ignoring files inside git modules..."
   eval "$(find_cmd)" | while read script; do
     head=$(head -n1 "$script")
-    [[ "$head" = "#!/usr/bin/env ruby" ]] && continue
+    [[ "$head" =~ .*ruby.* ]] && continue
+    [[ "$head" =~ .*zsh.* ]] && continue
     [[ "$head" =~ ^#compdef.* ]] && continue
     check "$script"
   done
