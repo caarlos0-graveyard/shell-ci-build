@@ -1,8 +1,11 @@
 language: bash
 install:
-  - ./build/install.sh
+  - ./install.sh
 script:
-  - ./build/build.sh
+  - ./build.sh
 notifications:
   email: false
 sudo: required
+os:
+  - linux
+  - osx

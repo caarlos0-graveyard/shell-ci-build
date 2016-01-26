@@ -6,3 +6,6 @@ script:
 notifications:
   email: false
 sudo: required
+os:
+  - linux
+  - osx
