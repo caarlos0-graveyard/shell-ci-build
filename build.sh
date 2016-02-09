@@ -28,7 +28,7 @@ find_prunes() {
 }
 
 find_cmd() {
-  echo "find . -type f -and \( -perm +111 -or -name '*.sh' \) $(find_prunes)"
+  echo "find . -type f -and \( -perm +x -or -name '*.sh' \) $(find_prunes)"
 }
 
 check_all_executables() {
