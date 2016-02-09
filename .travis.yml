@@ -3,6 +3,7 @@ install:
   - ./install.sh
 script:
   - ./build.sh
+  - ./tests/test-custom-check.sh
 notifications:
   email: false
 sudo: required
