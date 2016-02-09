@@ -3,7 +3,7 @@ set -eo pipefail
 
 linux() {
   sudo curl -Lso \
-    /usr/bin \
+    /usr/bin/shellcheck \
     https://github.com/caarlos0/shellcheck-docker/releases/download/v0.4.3/shellcheck
 }
 
