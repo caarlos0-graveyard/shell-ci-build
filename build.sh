@@ -42,4 +42,6 @@ check_all_executables() {
   done
 }
 
-check_all_executables
+if [[ "$0" == "${BASH_SOURCE[0]}" ]]; then
+  check_all_executables
+fi
