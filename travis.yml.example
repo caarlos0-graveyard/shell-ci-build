@@ -1,8 +1,12 @@
 language: bash
-sudo: required
+sudo: false
 os:
   - linux
   - osx
+addons:
+  apt:
+    packages:
+    - shellcheck
 install:
   - ./build/install.sh
 script:
