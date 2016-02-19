@@ -1,4 +1,12 @@
 language: bash
+sudo: false
+os:
+  - linux
+  - osx
+addons:
+  apt:
+    packages:
+    - shellcheck
 install:
   - ./install.sh
 script:
@@ -6,7 +14,3 @@ script:
   - ./tests/test-custom-check.sh
 notifications:
   email: false
-sudo: required
-os:
-  - linux
-  - osx

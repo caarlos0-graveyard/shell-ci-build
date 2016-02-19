@@ -2,10 +2,7 @@
 set -eo pipefail
 
 linux() {
-  sudo curl -Lso \
-    /usr/bin/shellcheck \
-    https://github.com/caarlos0/shellcheck-docker/releases/download/v0.4.3/shellcheck
-  sudo chmod +x /usr/bin/shellcheck
+  hash shellcheck 2>/dev/null || { echo >&2 "I require shellcheck but it wasn’t installed. Aborting."; exit 1; }
 }
 
 osx() {
