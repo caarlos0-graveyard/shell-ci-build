@@ -30,9 +30,10 @@ find_prunes() {
 find_cmd() {
   # GNU `find` dropped compatibility support for the `+` syntax with 4.5.12 (release 2013), it
   # instead uses `/` which has been supported for a long time. BSD `find` however still used `+`.
-  local perm_format_specifier="+"
-  if (( $(find --version /dev/null 2>&1 | grep GNU > /dev/null 2>&1; echo $?) == 0 )); then
-    perm_format_specifier="/"
+  if [ "$(find --version > /dev/null 2>&1)" ]; then
+    local perm_format_specifier="/"
+  else
+    local perm_format_specifier="+"
   fi
 
   echo "find . -type f -and \( -perm ${perm_format_specifier}111 -or -name '*.sh' \) $(find_prunes)"
