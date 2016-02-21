@@ -28,7 +28,15 @@ find_prunes() {
 }
 
 find_cmd() {
-  echo "find . -type f -and \( -perm +x -or -name '*.sh' \) $(find_prunes)"
+  # GNU `find` dropped compatibility support for the `+` syntax with 4.5.12 (release 2013), it
+  # instead uses `/` which has been supported for a long time. BSD `find` however still used `+`.
+  if [ "$(find --version > /dev/null 2>&1)" ]; then
+    local perm_format_specifier="/"
+  else
+    local perm_format_specifier="+"
+  fi
+
+  echo "find . -type f -and \( -perm ${perm_format_specifier}111 -or -name '*.sh' \) $(find_prunes)"
 }
 
 check_all_executables() {
