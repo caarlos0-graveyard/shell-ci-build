@@ -26,7 +26,7 @@ find_scripts() {
 }
 
 is_compatible() {
-  head -n1 "$1" | egrep -v "ruby|zsh|compdef" > /dev/null 2>&1
+  head -n1 "$1" | egrep -w "sh|bash|ksh" > /dev/null 2>&1
 }
 
 check_all_executables() {
