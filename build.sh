@@ -28,7 +28,8 @@ is_compatible() {
 check_all_executables() {
   echo "Linting all executables and .*sh files..."
   find_scripts | while read -r script; do
-    is_compatible "$script" && check "$script"
+    is_compatible "$script" || continue
+    check "$script"
   done
 }
 
