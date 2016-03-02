@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
 set -eo pipefail
-[[ "${DEBUG:-}" ]] && set -x
+test -n "${DEBUG:-}" && set -x
 
 success() {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] Linting %s...\n" "$1"
+  printf "\r  [ \033[00;32mOK\033[0m ] Linting %s...\n" "$1"
 }
 
 fail() {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] Linting %s...\n" "$1"
+  printf "\r  [\033[0;31mFAIL\033[0m] Linting %s...\n" "$1"
   exit 1
+}
+
+info() {
+  printf "\r  [ \033[00;34m??\033[0m ] %s\n" "$1"
 }
 
 check() {
@@ -17,39 +21,28 @@ check() {
   success "$script"
 }
 
-find_prunes() {
-  local prunes="! -path './.git/*'"
-  if [ -f .gitmodules ]; then
-    while read -r module; do
-      prunes="$prunes ! -path './$module/*'"
-    done < <(grep path .gitmodules | awk '{print $3}')
-  fi
-  echo "$prunes"
+find_scripts() {
+  git ls-tree -r HEAD | egrep '^1007|.*\..*sh$' | awk '{print $4}'
 }
 
-find_cmd() {
-  # GNU `find` dropped compatibility support for the `+` syntax with 4.5.12 (release 2013), it
-  # instead uses `/` which has been supported for a long time. BSD `find` however still used `+`.
-  if [ "$(find --version > /dev/null 2>&1)" ]; then
-    local perm_format_specifier="/"
-  else
-    local perm_format_specifier="+"
-  fi
-
-  echo "find . -type f -and \( -perm ${perm_format_specifier}111 -or -name '*.sh' \) $(find_prunes)"
+is_compatible() {
+  head -n1 "$1" | egrep -v "ruby|zsh|compdef" > /dev/null 2>&1
 }
 
 check_all_executables() {
-  echo "Linting all executables and .sh files, ignoring files inside git modules..."
-  eval "$(find_cmd)" | while read -r script; do
-    head=$(head -n1 "$script")
-    [[ "$head" =~ .*ruby.* ]] && continue
-    [[ "$head" =~ .*zsh.* ]] && continue
-    [[ "$head" =~ ^#compdef.* ]] && continue
-    check "$script"
+  echo "Linting all executables and .*sh files..."
+  find_scripts | while read -r script; do
+    if is_compatible "$script"; then
+      check "$script"
+    else
+      info "Skipping $script..."
+    fi
   done
 }
 
-if [[ "$0" == "${BASH_SOURCE[0]}" ]]; then
+# if being executed, check all executables, otherwise do nothing
+if [ $SHLVL -gt 1 ]; then
   check_all_executables
+else
+  return 0
 fi
