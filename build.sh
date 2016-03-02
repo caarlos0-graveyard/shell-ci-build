@@ -3,12 +3,16 @@ set -eo pipefail
 test -n "${DEBUG:-}" && set -x
 
 success() {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] Linting %s...\n" "$1"
+  printf "\r  [ \033[00;32mOK\033[0m ] Linting %s...\n" "$1"
 }
 
 fail() {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] Linting %s...\n" "$1"
+  printf "\r  [\033[0;31mFAIL\033[0m] Linting %s...\n" "$1"
   exit 1
+}
+
+info() {
+  printf "\r  [ \033[00;34m??\033[0m ] %s\n" "$1"
 }
 
 check() {
@@ -28,8 +32,11 @@ is_compatible() {
 check_all_executables() {
   echo "Linting all executables and .*sh files..."
   find_scripts | while read -r script; do
-    is_compatible "$script" || continue
-    check "$script"
+    if is_compatible "$script"; then
+      check "$script"
+    else
+      info "Skipping $script..."
+    fi
   done
 }
 
