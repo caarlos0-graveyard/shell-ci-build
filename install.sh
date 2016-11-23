@@ -2,12 +2,9 @@
 set -eo pipefail
 
 linux() {
-  local url="https://github.com/caarlos0/shellcheck-docker/releases/download/v0.4.5/shellcheck"
-  if which sudo >/dev/null 2>&1; then
-    sudo curl -Lso /usr/bin/shellcheck "$url"
-  else
-    curl -Lso /usr/bin/shellcheck "$url"
-  fi
+  sudo curl -Lso \
+    /usr/bin/shellcheck \
+    https://github.com/caarlos0/shellcheck-docker/releases/download/v0.4.5/shellcheck
   sudo chmod +x /usr/bin/shellcheck
 }
 
