@@ -1,4 +1,4 @@
-shell-ci-build [![Build Status](https://travis-ci.org/caarlos0/shell-ci-build.svg?branch=master)](https://travis-ci.org/caarlos0/shell-ci-build)
+shell-ci-build [![Build Status](https://travis-ci.org/caarlos0/shell-ci-build.svg?branch=master)](https://travis-ci.org/caarlos0/shell-ci-build) [![SayThanks.io](https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg?style=flat-square)](https://saythanks.io/to/caarlos0)
 ==================
 
 A submodule to lint your shell projects with shellcheck in travis.ci builds.
