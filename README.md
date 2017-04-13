@@ -17,12 +17,6 @@ git submodule add https://github.com/caarlos0/shell-ci-build.git build
 cp build/travis.yml.example .travis.yml
 ```
 
-We also support Shippable:
-
-```
-cp build/shippable.yml.example .shippable.yml
-```
-
 Or tweak your `.travis.yml` to be like this:
 
 ```yml
