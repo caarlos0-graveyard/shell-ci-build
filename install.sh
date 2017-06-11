@@ -9,7 +9,7 @@ linux() {
 }
 
 osx() {
-	brew update
+	brew update >/dev/null
 	brew install shellcheck
 }
 
